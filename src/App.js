@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './Components/Routes/HomePage/HomePage';
-import Navigation from './Components/Routes/Navigation/Navigation';
-import ShopPage from './Components/Routes/ShopPage/ShopPage';
-import SignInPage from './Components/Routes/SignInPage/SignInPage';
+import Authentication from './Routes/Authentication/Authentication';
+import HomePage from './Routes/HomePage/HomePage';
+import Navigation from './Routes/Navigation/Navigation';
+import ShopPage from './Routes/ShopPage/ShopPage';
 
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
       <Route path='/' element={<Navigation />}>
         <Route index element={<HomePage />} />
         <Route path='shop' element={<ShopPage />} />
-        <Route path='sign-in' element={<SignInPage />} />
+        <Route path='auth' element={<Authentication />} />
       </Route>
     </Routes>
   );

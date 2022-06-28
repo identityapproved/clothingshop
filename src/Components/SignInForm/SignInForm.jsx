@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Button from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
 import './SignInForm.styles.scss'
-import { createUserDocumentFromAuth, signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from '../../utils/firebase/firebase.utils';
+import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from '../../utils/firebase/firebase.utils';
 
 
 // import { getRedirectResult } from 'firebase/auth'
@@ -51,7 +51,7 @@ const SignInForm = () => {
 	}
 
 	const signInWithGoogle = async () => {
-	await signInWithGooglePopup();
+		await signInWithGooglePopup();
 	}
 
 	/* 	useEffect(async () => {

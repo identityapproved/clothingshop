@@ -1,5 +1,5 @@
 import React from 'react'
-import CategoriesContainer from '../../Components/Container/CategoriesContainer';
+import CategoriesContainer from '../../Components/CategoriesContainer/CategoriesContainer';
 
 const HomePage = () => {
 	const categories = [

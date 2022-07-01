@@ -1,5 +1,5 @@
 import React from 'react'
-import CategoriesContainer from '../../Components/CategoriesContainer/CategoriesContainer';
+import HomePageCategoriesContainer from '../../Components/HomePageCategoriesContainer/HomePageCategoriesContainer';
 
 const HomePage = () => {
 	const categories = [
@@ -31,7 +31,7 @@ const HomePage = () => {
 	]
 
 	return (
-		<CategoriesContainer categories={categories} />
+		<HomePageCategoriesContainer categories={categories} />
 	);
 }
 

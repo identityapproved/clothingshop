@@ -1,12 +1,12 @@
 import React from 'react'
-import CategoryItem from '../CategoryItem/CategoryItem'
-import './CategoriesConteiner.styles.scss'
+import HomePageCategory from '../HomePageCategory/HomePageCategory'
+import './HomePageCategoriesContainer.styles.scss'
 
 const CategoriesContainer = ({ categories }) => {
 	return (
-		<div className="categories-container">
+		<div className="home-page-categories-container ">
 			{categories.map((category) => (
-				<CategoryItem
+				<HomePageCategory
 					key={category.id}
 					category={category}
 				/>

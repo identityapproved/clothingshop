@@ -1,19 +1,22 @@
 import React from 'react'
-import './HomePageCategory.styles.scss'
+import { useNavigate } from 'react-router-dom';
+import './HomePageCategory.styles.jsx'
+import { BackgroundImage, Body, CategoryContainer } from './HomePageCategory.styles.jsx';
 
 const HomePageCategory = ({ category }) => {
-	const { title, imageUrl } = category;
+	const { title, imageUrl, route } = category;
+	const navigate = useNavigate()
+
+	const onNavigateHandler = () => navigate(route)
 
 	return (
-		<div className="home-page-category-container" >
-			<div
-				className="background-image"
-				style={{ backgroundImage: `url(${imageUrl})` }} />
-			<div className="home-page-category-body-container">
+		<CategoryContainer onClick={onNavigateHandler}>
+			<BackgroundImage imageUrl={imageUrl} />
+			<Body>
 				<h2>{title}</h2>
 				<p>Shop Now</p>
-			</div>
-		</div>
+			</Body>
+		</CategoryContainer>
 	)
 }
 

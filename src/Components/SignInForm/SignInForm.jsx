@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import Button from '../Button/Button';
+import Button, { BUTTON_TYPES } from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
-import './SignInForm.styles.scss'
 import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from '../../utils/firebase/firebase.utils';
+import { ButtonsContainer, SignInContainer } from './SignInForm.styles.jsx';
 
 
 // import { getRedirectResult } from 'firebase/auth'
@@ -63,7 +63,7 @@ const SignInForm = () => {
 		}, []) */
 
 	return (
-		<div className="sign-in-container">
+		<SignInContainer>
 			<h2>Already have an account?</h2>
 			<span>Sign In With Email And Password</span>
 
@@ -73,15 +73,15 @@ const SignInForm = () => {
 
 				<FormInput label='Password' required type="password" onChange={onHandleChange} name='password' value={password} />
 
-				<div className="buttons-container">
+				<ButtonsContainer>
 					<Button type='submit'>Sign In</Button>
 
-					<Button type='button' buttonType='google' onClick={signInWithGoogle}>Google Sign In</Button>
+					<Button type='button' buttonType={BUTTON_TYPES.google} onClick={signInWithGoogle}>Google Sign In</Button>
 					{/* <button onClick={signInWithGoogleRedirect}>Sign In With Google</button> */}
-				</div>
+				</ButtonsContainer>
 			</form>
 
-		</div>
+		</SignInContainer>
 	)
 }
 

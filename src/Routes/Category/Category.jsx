@@ -9,7 +9,6 @@ import { CategoryContainer, Title } from './Category.styles.jsx'
 const Category = () => {
 	const { category } = useParams()
 	const categoriesMap = useSelector(selectCategoriesMap)
-	console.log("~ categoriesMap", categoriesMap)
 	const [products, setProducts] = useState(categoriesMap[category])
 
 

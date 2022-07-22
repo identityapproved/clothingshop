@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
 import Button, { BUTTON_TYPES } from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
-import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from '../../utils/firebase/firebase.utils';
 import { ButtonsContainer, SignInContainer } from './SignInForm.styles.jsx';
-
-
-// import { getRedirectResult } from 'firebase/auth'
+import { useDispatch } from 'react-redux';
+import { emailSignInStart, googleSignInStart } from '../../store/user/user.action';
 
 const defaultFormField = {
 	email: '',
@@ -13,6 +11,7 @@ const defaultFormField = {
 }
 
 const SignInForm = () => {
+	const dispatch = useDispatch()
 	const [formField, setFormField] = useState(defaultFormField);
 	const { email, password } = formField;
 
@@ -24,7 +23,7 @@ const SignInForm = () => {
 		event.preventDefault();
 
 		try {
-			await signInAuthUserWithEmailAndPassword(email, password);
+			dispatch(emailSignInStart(email, password))
 
 			resetFormFields()
 		} catch (error) {
@@ -51,16 +50,8 @@ const SignInForm = () => {
 	}
 
 	const signInWithGoogle = async () => {
-		await signInWithGooglePopup();
+		dispatch(googleSignInStart())
 	}
-
-	/* 	useEffect(async () => {
-			const response = await getRedirectResult(auth)
-	
-			if (response) {
-				const userDocRef = await createUserDocumentFromAuth(response.user)
-			}
-		}, []) */
 
 	return (
 		<SignInContainer>
@@ -77,7 +68,6 @@ const SignInForm = () => {
 					<Button type='submit'>Sign In</Button>
 
 					<Button type='button' buttonType={BUTTON_TYPES.google} onClick={signInWithGoogle}>Google Sign In</Button>
-					{/* <button onClick={signInWithGoogleRedirect}>Sign In With Google</button> */}
 				</ButtonsContainer>
 			</form>
 

@@ -6,22 +6,14 @@ import CheckoutPage from './Routes/CheckoutPage/CheckoutPage';
 import HomePage from './Routes/HomePage/HomePage';
 import Navigation from './Routes/Navigation/Navigation';
 import ShopPage from './Routes/ShopPage/ShopPage';
-import { setCurrentUser } from './store/user/user.action';
-import { createUserDocumentFromAuth, onAuthStateChangedListener } from './utils/firebase/firebase.utils';
+import { checkUserSession } from './store/user/user.action';
 
 const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user)
-      }
-
-      dispatch(setCurrentUser(user))
-    });
-
-    return unsubscribe;
+    dispatch(checkUserSession())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

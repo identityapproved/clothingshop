@@ -31,6 +31,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
+// eslint-disable-next-line no-unused-vars
 const firebaseApp = initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
@@ -89,7 +90,7 @@ export const createUserDocumentFromAuth = async (userAuth, otherInformation) => 
 		}
 	}
 
-	return userDocRef;
+	return userSnapshot;
 }
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -107,3 +108,14 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => signOut(auth)
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
+
+export const getCurrentUser = () => {
+	return new Promise((resolve, reject) => {
+		const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
+			unsubscribe();
+			resolve(userAuth)
+		},
+			reject
+		)
+	})
+}

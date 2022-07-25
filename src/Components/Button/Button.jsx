@@ -1,5 +1,5 @@
 import React from 'react'
-import { BaseButton, GoogleSignInButton, InvertedButton } from './Button.styles'
+import { BaseButton, ButtonSpinner, GoogleSignInButton, InvertedButton } from './Button.styles'
 
 export const BUTTON_TYPES = {
 	base: 'base',
@@ -13,12 +13,13 @@ const getButton = (buttonType = BUTTON_TYPES.base) => ({
 	[BUTTON_TYPES.inverted]: InvertedButton,
 }[buttonType]);
 
-const Button = ({ children, buttonType, ...otherProps }) => {
+const Button = ({ children, buttonType, isLoading, ...otherProps }) => {
 	const CustomButton = getButton(buttonType);
 	return (
 		<CustomButton
+			disabled={isLoading}
 			{...otherProps}
-		>{children}</CustomButton>
+		>{isLoading ? <ButtonSpinner /> : children}</CustomButton>
 	)
 }
 

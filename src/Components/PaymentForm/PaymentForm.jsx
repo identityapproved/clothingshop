@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectCartTotal } from '../../store/cart/cart.selector'
 import { selectCurrentUser } from '../../store/user/user.selector'
+import { getCurrentUser } from '../../utils/firebase/firebase.utils'
 import { BUTTON_TYPES } from '../Button/Button'
 import { FormContainer, PaymentButton, PaymentFormContainer } from './PaymentForm.styles'
 
@@ -11,8 +12,12 @@ const PaymentForm = () => {
 	const stripe = useStripe()
 	const elements = useElements()
 	const currentUser = useSelector(selectCurrentUser)
+	console.log("~ currentUser", currentUser)
 	const amount = useSelector(selectCartTotal);
+	console.log("~ amount", amount)
 	const [isProcessingPayment, setIsProcessingPayment] = useState(false)
+
+
 
 	const paymentHandler = async (e) => {
 		e.preventDefault()

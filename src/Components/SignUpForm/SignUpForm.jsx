@@ -28,9 +28,11 @@ const SignUpForm = () => {
 
 		if (password !== confirmPassword) {
 			alert('Passwords must be the same')
+			return;
 		}
 
 		try {
+
 			dispatch(signUpStart(email, password, displayName))
 
 			resetFormFields()

@@ -1,3 +1,4 @@
+import { User } from 'firebase/auth';
 import { OtherInformation, UserData } from '../../utils/firebase/firebase.utils';
 import { Action, ActionWithPayload, createAction, withMatcher } from '../../utils/reducer/actionCreator.utils';
 import { USER_ACTION_TYPES } from './user.types';
@@ -20,25 +21,25 @@ export type EmailSignInStart = ActionWithPayload<USER_ACTION_TYPES.EMAIL_SIGN_IN
 
 export type SignInSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, UserData>;
 
-export type SignInFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_FAILED, UserData>;
+export type SignInFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_FAILED, Error>;
 
 export const emailSignInStart = withMatcher((email: string, password: string): EmailSignInStart => createAction(USER_ACTION_TYPES.EMAIL_SIGN_IN_START, { email, password }));
 
-export const signInSuccess = withMatcher((user: UserData): SignInSuccess => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user));
+export const signInSuccess = withMatcher((user: UserData & { id: string; }): SignInSuccess => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, user));
 
-export const signInFailed = withMatcher((user: UserData): SignInFailed => createAction(USER_ACTION_TYPES.SIGN_IN_FAILED, user));
+export const signInFailed = withMatcher((error: Error): SignInFailed => createAction(USER_ACTION_TYPES.SIGN_IN_FAILED, error));
 
 /* SIGN UP */
 
 export type SignUpStart = ActionWithPayload<USER_ACTION_TYPES.SIGN_UP_START, { email: string, password: string, displayName: string; }>;
 
-export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, { user: UserData; otherInformation: OtherInformation; }>;
+export type SignUpSuccess = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_SUCCESS, { user: User; otherInformation: OtherInformation; }>;
 
 export type SignUpFailed = ActionWithPayload<USER_ACTION_TYPES.SIGN_IN_FAILED, Error>;
 
 export const signUpStart = withMatcher((email: string, password: string, displayName: string): SignUpStart => createAction(USER_ACTION_TYPES.SIGN_UP_START, { email, password, displayName }));
 
-export const signUpSuccess = withMatcher((user: UserData, otherInformation: OtherInformation): SignUpSuccess => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, { user, otherInformation }));
+export const signUpSuccess = withMatcher((user: User, otherInformation: OtherInformation): SignUpSuccess => createAction(USER_ACTION_TYPES.SIGN_IN_SUCCESS, { user, otherInformation }));
 
 export const signUpFailed = withMatcher((error: Error): SignUpFailed => createAction(USER_ACTION_TYPES.SIGN_IN_FAILED, error));
 

@@ -1,55 +1,55 @@
-import React, { useState } from 'react'
+import { AuthError, AuthErrorCodes } from 'firebase/auth';
+import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { signUpStart } from '../../store/user/user.action';
 import Button from '../Button/Button';
 import FormInput from '../FormInput/FormInput';
-import './SignUpForm.styles.jsx'
-import { SignUpContainer } from './SignUpForm.styles.jsx';
+import './SignUpForm.styles';
+import { SignUpContainer } from './SignUpForm.styles';
 
 const defaultFormField = {
 	displayName: '',
 	email: '',
 	password: '',
 	confirmPassword: ''
-}
-
+};
 const SignUpForm = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const [formField, setFormField] = useState(defaultFormField);
 	const { displayName, email, password, confirmPassword } = formField;
 
 
 	const resetFormFields = () => {
-		setFormField(defaultFormField)
-	}
+		setFormField(defaultFormField);
+	};
 
-	const onHandleSubmit = async (event) => {
+	const onHandleSubmit = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 
 		if (password !== confirmPassword) {
-			alert('Passwords must be the same')
+			alert('Passwords must be the same');
 			return;
 		}
 
 		try {
 
-			dispatch(signUpStart(email, password, displayName))
+			dispatch(signUpStart(email, password, displayName));
 
-			resetFormFields()
+			resetFormFields();
 		} catch (error) {
-			if (error.code === 'auth/email-already-in-use') {
-				alert('Cannot create user, email already in use')
+			if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
+				alert('Cannot create user, email already in use');
 			} else {
-				console.log('user creation encountered an error', error)
+				console.log('user creation encountered an error', error);
 			}
 		}
-	}
+	};
 
-	const onHandleChange = (event) => {
+	const onHandleChange = (event: ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = event.target;
 
-		setFormField({ ...formField, [name]: value })
-	}
+		setFormField({ ...formField, [name]: value });
+	};
 
 	return (
 		<SignUpContainer>
@@ -69,7 +69,7 @@ const SignUpForm = () => {
 			</form>
 
 		</SignUpContainer>
-	)
-}
+	);
+};
 
 export default SignUpForm;

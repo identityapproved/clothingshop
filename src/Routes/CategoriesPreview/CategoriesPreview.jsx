@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { useSelector } from 'react-redux';
 import CategoryPreview from '../../Components/CategoryPreview/CategoryPreview.jsx';
 import Spinner from '../../Components/Spinner/Spinner.jsx';
-import { selectCategoriesMap, selectCategotiesIsLoading } from '../../store/categories/category.selector.js';
+import { selectCategoriesMap, selectCategotiesIsLoading } from '../../store/categories/category.selector';
 
 const CategoriesPreview = () => {
 	const categoriesMap = useSelector(selectCategoriesMap)

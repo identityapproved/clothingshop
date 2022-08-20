@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { CartItem as CartItemType } from '../../store/cart/cart.types';
 import { Details, Image, ItemContainer, Name } from './CartItem.styles';
 
-const CartItem = ({ cartItem }) => {
+type CartItemProps = {
+	cartItem: CartItemType;
+};
+
+const CartItem: FC<CartItemProps> = ({ cartItem }) => {
 	const { name, quantity, imageUrl, price } = cartItem;
 
 	return (
@@ -12,7 +17,7 @@ const CartItem = ({ cartItem }) => {
 				<span>{quantity} x ${price}</span>
 			</Details>
 		</ItemContainer>
-	)
-}
+	);
+};
 
-export default CartItem
+export default CartItem;

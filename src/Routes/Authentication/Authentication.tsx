@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import SignUpForm from '../../Components/SignUpForm/SignUpForm';
 import SignInForm from '../../Components/SignInForm/SignInForm';
-import { AuthenticationContainer } from './Authentication.styles.jsx';
+import { AuthenticationContainer } from './Authentication.styles';
 
 const Authentication = () => {
 	return (
@@ -9,7 +9,7 @@ const Authentication = () => {
 			<SignUpForm />
 			<SignInForm />
 		</AuthenticationContainer>
-	)
-}
+	);
+};
 
-export default Authentication
+export default Authentication;

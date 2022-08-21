@@ -1,6 +1,13 @@
-import React from 'react'
-import HomePageCategory from '../HomePageCategory/HomePageCategory'
+import React, { Key } from 'react';
+import HomePageCategory from '../HomePageCategory/HomePageCategory';
 import { CategoriesContainer } from './HomePageCategoriesContainer.styles';
+
+export type HomePageCategoriesTypes = {
+	id: Key;
+	title: string;
+	imageUrl: string;
+	route: string;
+};
 
 const categories = [
 	{
@@ -45,7 +52,7 @@ const HomePageCategoriesContainer = () => {
 				/>
 			))}
 		</CategoriesContainer>
-	)
-}
+	);
+};
 
 export default HomePageCategoriesContainer;
